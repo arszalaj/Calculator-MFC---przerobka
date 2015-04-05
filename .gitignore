@@ -30,4 +30,7 @@
 *.tlog
 *.ipch
 Debug/
+
+#pierdoły
+*.sdf
 Release/

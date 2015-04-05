@@ -159,7 +159,8 @@ BOOL CKalkulatorONPDlg::OnInitDialog()
 	InitCommonControls(); // potrzebne do wygl¹du a'la xp
 	rdec.SetCheck(1);
 	rad_rad.SetCheck(1);
-
+	
+	DrawAxis();
 
 	return FALSE;  // return TRUE  unless you set the focus to a control
 }
@@ -199,11 +200,40 @@ void CKalkulatorONPDlg::OnPaint()
 
 		// Draw the icon
 		dc.DrawIcon(x, y, m_hIcon);
+
 	}
 	else
 	{
 		CDialog::OnPaint();
+		DrawAxis();
 	}
+}
+
+void CKalkulatorONPDlg::DrawAxis()
+{
+	COLORREF qCircleColor = RGB(255,0,0);
+	CPen qCirclePen(PS_SOLID, 7, qCircleColor);
+	CDC* pDC = GetDC();
+	pDC->Rectangle(0,0,400,400);
+	CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
+
+	COLORREF qLineColor = RGB(0,0,255);
+	CPen qLinePen(PS_SOLID, 7, qLineColor); 
+	pDC->SelectObject(&qLinePen);
+	
+	pDC->SetPixel(200, 200, qLineColor);
+
+	pDC->MoveTo(100, 100);
+	pDC->LineTo(100, 500);
+	CString trol = CString("trol");
+	pDC->TextOut(10,10,trol);
+	//pDC->SelectObject(pqOrigPen);
+	
+	pDC->AbortPath();
+	pDC->SetPixel(200, 200, qCircleColor);
+	
+	pDC->MoveTo(0, 200);
+	pDC->LineTo(400, 200);
 }
 
 // The system calls this function to obtain the cursor to display while the user drags
@@ -480,24 +510,25 @@ void CKalkulatorONPDlg::OnBnClickedC()
 */
 void CKalkulatorONPDlg::OnBnClickedEqual()
 {
-	COLORREF qCircleColor = RGB(255,0,0);
-	CPen qCirclePen(PS_SOLID, 7, qCircleColor);
-	CDC* pDC = GetDC();
-	CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
-	pDC->Ellipse(100, 100, 500, 500);
+	DrawAxis();
+	//COLORREF qCircleColor = RGB(255,0,0);
+	//CPen qCirclePen(PS_SOLID, 7, qCircleColor);
+	//CDC* pDC = GetDC();
+	//CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
+	//pDC->Ellipse(100, 100, 500, 500);
 
-	COLORREF qLineColor = RGB(0,0,255);
-	CPen qLinePen(PS_SOLID, 7, qLineColor); 
-	pDC->SelectObject(&qLinePen);
+	//COLORREF qLineColor = RGB(0,0,255);
+	//CPen qLinePen(PS_SOLID, 7, qLineColor); 
+	//pDC->SelectObject(&qLinePen);
 
-	pDC->SetPixel(200, 200, qLineColor);
+	//pDC->SetPixel(200, 200, qLineColor);
 
-	pDC->MoveTo(100, 100);
-	pDC->LineTo(200, 200);
-	pDC->LineTo(300, 100);
-	pDC->LineTo(500, 500);
-	pDC->TextOutA(200,400,"cdscdscscd");
-	pDC->SelectObject(pqOrigPen);
+	//pDC->MoveTo(100, 100);
+	//pDC->LineTo(200, 200);
+	//pDC->LineTo(300, 100);
+	//pDC->LineTo(500, 500);
+	//pDC->TextOutA(200,400,"cdscdscscd");
+	//pDC->SelectObject(pqOrigPen);
 
 
 	CString buffer;
