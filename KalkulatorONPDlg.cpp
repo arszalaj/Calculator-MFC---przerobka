@@ -86,27 +86,9 @@ void CKalkulatorONPDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LB, but_lb);
 	DDX_Control(pDX, IDC_RB, but_rb);
 	DDX_Control(pDX, IDC_CE, but_ce);
-	DDX_Control(pDX, IDC_PI, but_pi);
 	DDX_Control(pDX, IDC_EDIT3, ed_result);
 	DDX_Control(pDX, IDC_EDIT1, ed_onpexp);
 	DDX_Control(pDX, IDC_EDIT2, ed_exp);
-	DDX_Control(pDX, IDC_DEC_RAD, rdec);
-	DDX_Control(pDX, IDC_A, but_a);
-	DDX_Control(pDX, IDC_B, but_b);
-	DDX_Control(pDX, IDC_C_HEx, but_c);
-	DDX_Control(pDX, IDC_D, but_d);
-	DDX_Control(pDX, IDC_E, but_e);
-	DDX_Control(pDX, IDC_F, but_f);
-	DDX_Control(pDX, IDC_DEG_RAD, deg_rad);
-	DDX_Control(pDX, IDC_RAD_RAD, rad_rad);
-	DDX_Control(pDX, IDC_INV_CB, InvCB);
-	DDX_Control(pDX, IDC_SIN, but_sin);
-	DDX_Control(pDX, IDC_COS, but_cos);
-	DDX_Control(pDX, IDC_TG, but_tg);
-	DDX_Control(pDX, IDC_EXP, but_exp);
-	DDX_Control(pDX, IDC_LOG, but_log);
-	DDX_Control(pDX, IDC_SQRT, but_sqrt);
-	DDX_Control(pDX, IDC_POW, but_pow);
 }
 
 BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
@@ -138,6 +120,7 @@ BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
 	ON_BN_CLICKED(IDC_C, &CKalkulatorONPDlg::OnBnClickedC)
 	ON_BN_CLICKED(IDC_EQUAL, &CKalkulatorONPDlg::OnBnClickedEqual)
 	ON_BN_CLICKED(IDC_X, &CKalkulatorONPDlg::OnBnClickedX)
+	ON_BN_CLICKED(IDC_POW, &CKalkulatorONPDlg::OnBnClickedPow)
 END_MESSAGE_MAP()
 
 
@@ -562,4 +545,11 @@ void CKalkulatorONPDlg::OnBnClickedX()
 	// TODO: Add your control notification handler code here
 	this->appendTextToExp("x");
 	
+}
+
+
+void CKalkulatorONPDlg::OnBnClickedPow()
+{
+	// TODO: Add your control notification handler code here
+	this->appendTextToExp("^");
 }

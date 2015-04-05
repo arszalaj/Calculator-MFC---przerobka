@@ -122,4 +122,5 @@ public:
 	CButton but_log;
 	CButton but_sqrt;
 	CButton but_pow;
+	afx_msg void OnBnClickedPow();
 };
