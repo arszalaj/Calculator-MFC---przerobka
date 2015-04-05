@@ -159,8 +159,6 @@ BOOL CKalkulatorONPDlg::OnInitDialog()
 	InitCommonControls(); // potrzebne do wygl¹du a'la xp
 	rdec.SetCheck(1);
 	rad_rad.SetCheck(1);
-	this->actSys = CONP::dec;
-	this->actTrig = CONP::rad;
 
 
 	return FALSE;  // return TRUE  unless you set the focus to a control
@@ -507,7 +505,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 	ed_exp.GetWindowTextA(buffer);
 
 	string infix_expr = buffer.GetString();
-	infix_expr = onp.convert(infix_expr,this->actSys,CONP::dec);
+	//infix_expr = onp.convert(infix_expr,this->actSys,CONP::dec);
 	string onp_ex;
 	char buf[256];
 	if(onp.infixToONP(infix_expr,onp_ex) == -1)
@@ -519,10 +517,10 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 	}
 	else
 	{
-		onp_ex = onp.convert(onp_ex,CONP::dec,this->actSys);
+		//onp_ex = onp.convert(onp_ex);
 		ed_onpexp.SetWindowTextA(onp_ex.c_str());
-		onp_ex = onp.convert(onp_ex,this->actSys,CONP::dec);
-		if(onp.evaluateONP(onp_ex,ld_result,actTrig) == -1)
+		//onp_ex = onp.convert(onp_ex);
+		if(onp.evaluateONP(onp_ex,ld_result) == -1)
 		{
 			ed_result.SetWindowTextA("Nie mozna obliczyc wyrazenia");
 		return ;
@@ -531,7 +529,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 		{
 			sprintf(buf,"%.15Lf",ld_result);
 			wyn = buf;
-			wyn = onp.convert(wyn,CONP::dec,this->actSys);
+			//wyn = onp.convert(wyn,CONP::dec,this->actSys);
 			ed_result.SetWindowTextA(wyn.c_str());
 		}
 	}

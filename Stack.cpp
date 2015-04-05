@@ -10,9 +10,6 @@ CStack::CStack(void)
 	stack.reserve(20);
 }
 
-/**
-* Destruktor zwalniaj¹cy pamiêæ po pojemniku.
-*/
 CStack::~CStack(void)
 {
 	stack.clear();

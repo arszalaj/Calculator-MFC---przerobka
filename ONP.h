@@ -34,31 +34,13 @@ public:
 	CONP(void);
 	~CONP(void);
 	int infixToONP(std::string infix,std::string &onp);
-	enum trig{ deg, rad};
-	int evaluateONP(std::string onp,long double &result, trig units);
-	enum sys{ bin,oct,dec,hex } ;
-	void setActSystem(sys s);
-	int getActualSystem() const;
-	string decToHex(string int_string) const;
-	string decToBin(string int_string) const;
-	string decToOct(string int_string) const;
-	string binToDec(string bin_string) const;
-	string hexToDec(string hex_string) const;
-	string octToDec(string oct_string) const;
-
-	string radToDeg(string rad) const;
-	string degToRad(string deg) const;
-
-	string convert(string exp, sys from, sys to) const;
+	int evaluateONP(std::string onp,long double &result);
 
 
 private:
-	bool isFunction(string fn);
 	int getPrior(string op,int &assoc);
-	bool evaluateFunction(string fn, string arg, long double &result, trig units);
 	int getNextElement(string exp,string &buffer, int &position,bool ONP);
 	long long my_atoll(const char *instr) const;
-	int silnia(int n) const;
 
 
 

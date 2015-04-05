@@ -7,13 +7,14 @@ using namespace std;
 * Implementacja stosu elementów klasy string z wykorzystaniem pojemnika (vector).
 * @author 
 */
-
-
 class CStack
 {
 public:
 	CStack(void);
-	~CStack(void);
+	/**
+* Destruktor zwalniaj¹cy pamiêæ po pojemniku.
+*/
+ ~CStack(void);
 
 	int getActualSize();
 	void push(string element);
@@ -23,4 +24,5 @@ public:
 
 private:
 	std::vector <std::string> stack; ///< pojemnik elementów klasy string
+	//std::deque <std::string> stack; ///< pojemnik elementów klasy string
 };

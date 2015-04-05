@@ -44,8 +44,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	CONP onp;
-	CONP::sys actSys;
-	CONP::trig actTrig;
 
 public:
 	CButton but_1;
