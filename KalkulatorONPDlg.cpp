@@ -600,7 +600,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 
 void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 {
-	string onp_ex, infixTmp = infix_expr;
+	string onp_ex, infixTmp = AddMultForX(infix_expr);
 	CDC* pDC = GetDC();
 	COLORREF qLineColor = RGB(0,0,0);
 	CPen qLinePen(PS_SOLID, 1, qLineColor); 
@@ -619,6 +619,20 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 		//fY = evaluate(onp_ex,fX);
 		pDC->LineTo(WPoint(fX,fY));
 	}
+}
+
+string CKalkulatorONPDlg::AddMultForX(string infix_expr)
+{
+	int i = 0;
+	while(i < infix_expr.length())
+	{	
+		if(isdigit(infix_expr[i]) && infix_expr[i+1] == 'x')
+		{
+			infix_expr = infix_expr.substr(0,i+1) + '*' + infix_expr.substr(i+1);
+		}
+		i++;
+	}
+	return infix_expr;
 }
 
 void CKalkulatorONPDlg::replaceAll(std::string& str, const std::string& from, const std::string& to) {

@@ -127,5 +127,6 @@ public:
 	CButton but_pow;
 	afx_msg void OnBnClickedPow();
 	void replaceAll(std::string& str, const std::string& from, const std::string& to);
+	string CKalkulatorONPDlg::AddMultForX(string infix_expr);
 	afx_msg void OnBnClickedButtonClear();
 };
