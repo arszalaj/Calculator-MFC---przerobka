@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "KalkulatorONP.h"
 #include "KalkulatorONPDlg.h"
+#include "WPoint.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -89,6 +90,7 @@ void CKalkulatorONPDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT3, ed_result);
 	DDX_Control(pDX, IDC_EDIT1, ed_onpexp);
 	DDX_Control(pDX, IDC_EDIT2, ed_exp);
+	DDX_Control(pDX, IDC_EDIT4, ed_x);
 }
 
 BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
@@ -121,6 +123,7 @@ BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
 	ON_BN_CLICKED(IDC_EQUAL, &CKalkulatorONPDlg::OnBnClickedEqual)
 	ON_BN_CLICKED(IDC_X, &CKalkulatorONPDlg::OnBnClickedX)
 	ON_BN_CLICKED(IDC_POW, &CKalkulatorONPDlg::OnBnClickedPow)
+	ON_BN_CLICKED(IDC_BUTTON_CLEAR, &CKalkulatorONPDlg::OnBnClickedButtonClear)
 END_MESSAGE_MAP()
 
 
@@ -206,35 +209,83 @@ void CKalkulatorONPDlg::OnPaint()
 	{
 		CDialog::OnPaint();
 		DrawAxis();
+		//DrawNet();
 	}
 }
 
 void CKalkulatorONPDlg::DrawAxis()
 {
-	COLORREF qCircleColor = RGB(255,0,0);
-	CPen qCirclePen(PS_SOLID, 7, qCircleColor);
+	//COLORREF qCircleColor = RGB(255,0,0);
+	//CPen qCirclePen(PS_SOLID, 7, qCircleColor);
 	CDC* pDC = GetDC();
-	pDC->Rectangle(0,0,400,400);
-	CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
+	pDC->Rectangle(0,0,700,700);
+	//CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
 
-	COLORREF qLineColor = RGB(0,0,255);
-	CPen qLinePen(PS_SOLID, 7, qLineColor); 
+	COLORREF qLineColor = RGB(0,0,0);
+	CPen qLinePen(PS_SOLID, 2, qLineColor); 
 	pDC->SelectObject(&qLinePen);
 	
 	pDC->SetPixel(200, 200, qLineColor);
 
-	pDC->MoveTo(100, 100);
-	pDC->LineTo(100, 500);
+//	Get
+//	CRect rect;
+//CWnd *pWnd = CKalkulatorONPDlg::GetDlgItem(IDD_KALKULATORONP_DIALOG);
+//pWnd->GetWindowRect(&rect);
+////pDlg->ScreenToClient(&rect);
+
+	pDC->MoveTo(WPoint(0,-10));
+	pDC->LineTo(WPoint(0,10));
 	CString trol = CString("trol");
 	pDC->TextOut(10,10,trol);
 	//pDC->SelectObject(pqOrigPen);
+	//
+	//pDC->AbortPath();
+	//pDC->SetPixel(200, 200, qCircleColor);
 	
-	pDC->AbortPath();
-	pDC->SetPixel(200, 200, qCircleColor);
-	
-	pDC->MoveTo(0, 200);
-	pDC->LineTo(400, 200);
+	int width = 10;
+
+	pDC->MoveTo(WPoint(-width,0));
+	pDC->LineTo(WPoint(width,0));
+
+	pDC->MoveTo(WPoint(-width*0.04,width*0.96));
+	pDC->LineTo(WPoint(0,width));
+	pDC->LineTo(WPoint(width*0.04,width*0.96));
+
+	pDC->MoveTo(WPoint(width*0.96,width*0.04));
+	pDC->LineTo(WPoint(width,0));
+	pDC->LineTo(WPoint(width*0.96,-width*0.04));
 }
+
+void CKalkulatorONPDlg::DrawNet()
+{
+	CDC* pDC = GetDC();
+	COLORREF qLineColor = RGB(0,0,0);
+	CPen qLinePen(PS_SOLID, 1, qLineColor); 
+	pDC->SelectObject(&qLinePen);
+	
+	int width = 10;
+
+	for(int i = -width; i<width; i+=2)
+	{
+		for(int j = -width-1; j<width; j+=2)
+		{
+			pDC->MoveTo(WPoint(i,j++));
+			pDC->LineTo(WPoint(i,j++));
+			pDC->LineTo(WPoint(i,j));
+		}
+	}
+
+	for(int j = -width; j<width; j+=2)
+	{
+		for(int i = -width-1; i<width; i+=2)
+		{
+			pDC->MoveTo(WPoint(i++,j));
+			pDC->LineTo(WPoint(i++,j));
+			pDC->LineTo(WPoint(i,j));
+		}
+	}
+}
+
 
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
@@ -510,47 +561,26 @@ void CKalkulatorONPDlg::OnBnClickedC()
 */
 void CKalkulatorONPDlg::OnBnClickedEqual()
 {
-	DrawAxis();
-	//COLORREF qCircleColor = RGB(255,0,0);
-	//CPen qCirclePen(PS_SOLID, 7, qCircleColor);
-	//CDC* pDC = GetDC();
-	//CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
-	//pDC->Ellipse(100, 100, 500, 500);
-
-	//COLORREF qLineColor = RGB(0,0,255);
-	//CPen qLinePen(PS_SOLID, 7, qLineColor); 
-	//pDC->SelectObject(&qLinePen);
-
-	//pDC->SetPixel(200, 200, qLineColor);
-
-	//pDC->MoveTo(100, 100);
-	//pDC->LineTo(200, 200);
-	//pDC->LineTo(300, 100);
-	//pDC->LineTo(500, 500);
-	//pDC->TextOutA(200,400,"cdscdscscd");
-	//pDC->SelectObject(pqOrigPen);
-
-
-	CString buffer;
+	CString buffer, bufferX;
 	string wyn;
 	ed_exp.GetWindowTextA(buffer);
+	ed_x.GetWindowTextA(bufferX);
 
-	string infix_expr = buffer.GetString();
-	//infix_expr = onp.convert(infix_expr,this->actSys,CONP::dec);
+	string infix_expr = buffer.GetString(), infix_exprTmp = infix_expr;
+	string x_expr = bufferX.GetString();
 	string onp_ex;
 	char buf[256];
+	replaceAll(infix_expr,"x", "(" + x_expr + ")");
 	if(onp.infixToONP(infix_expr,onp_ex) == -1)
 	{
 		buffer = "Nieprawidlowe lub nieobslugiwane wyrazenie";
-		ed_exp.SetWindowTextA(buffer);
+		ed_result.SetWindowTextA(buffer);
 		ed_onpexp.SetWindowTextA(buffer);
 		return ;
 	}
 	else
 	{
-		//onp_ex = onp.convert(onp_ex);
 		ed_onpexp.SetWindowTextA(onp_ex.c_str());
-		//onp_ex = onp.convert(onp_ex);
 		if(onp.evaluateONP(onp_ex,ld_result) == -1)
 		{
 			ed_result.SetWindowTextA("Nie mozna obliczyc wyrazenia");
@@ -560,11 +590,45 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 		{
 			sprintf(buf,"%.15Lf",ld_result);
 			wyn = buf;
-			//wyn = onp.convert(wyn,CONP::dec,this->actSys);
 			ed_result.SetWindowTextA(wyn.c_str());
+
+			DrawCurve(infix_exprTmp);
 		}
 	}
 	moveCursorToEnd(ed_exp);
+}
+
+void CKalkulatorONPDlg::DrawCurve(string infix_expr)
+{
+	string onp_ex, infixTmp = infix_expr;
+	CDC* pDC = GetDC();
+	COLORREF qLineColor = RGB(0,0,0);
+	CPen qLinePen(PS_SOLID, 1, qLineColor); 
+	pDC->SelectObject(&qLinePen);
+	
+	int width = 10;
+	long double fY;
+
+	pDC->MoveTo(WPoint(-width,0));
+	for (float fX = - width; fX < width; fX += 0.1f)
+	{
+		infix_expr = infixTmp;
+		replaceAll(infix_expr,"x", "(" + to_string(fX) + ")");
+		onp.infixToONP(infix_expr,onp_ex);
+		onp.evaluateONP(onp_ex,fY);
+		//fY = evaluate(onp_ex,fX);
+		pDC->LineTo(WPoint(fX,fY));
+	}
+}
+
+void CKalkulatorONPDlg::replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    if(from.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
 }
 /**
 * Obs³uga przycisku 'x'
@@ -581,4 +645,10 @@ void CKalkulatorONPDlg::OnBnClickedPow()
 {
 	// TODO: Add your control notification handler code here
 	this->appendTextToExp("^");
+}
+
+
+void CKalkulatorONPDlg::OnBnClickedButtonClear()
+{
+	OnPaint();
 }

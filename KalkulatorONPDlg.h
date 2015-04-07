@@ -41,6 +41,9 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg void DrawAxis();
+	afx_msg void DrawNet();
+	afx_msg void DrawCurve(string infix);
+	double evaluate(string infix_expr, double x);
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
@@ -71,6 +74,7 @@ public:
 	CEdit ed_result;
 	CEdit ed_onpexp;
 	CEdit ed_exp;
+	CEdit ed_x;
 	afx_msg void OnBnClicked1();
 	afx_msg void OnBnClicked2();
 	afx_msg void OnBnClicked3();
@@ -122,4 +126,6 @@ public:
 	CButton but_sqrt;
 	CButton but_pow;
 	afx_msg void OnBnClickedPow();
+	void replaceAll(std::string& str, const std::string& from, const std::string& to);
+	afx_msg void OnBnClickedButtonClear();
 };
