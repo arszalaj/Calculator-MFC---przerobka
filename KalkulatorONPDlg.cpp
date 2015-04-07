@@ -570,6 +570,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 	string x_expr = bufferX.GetString();
 	string onp_ex;
 	char buf[256];
+	infix_expr = AddMultForX(infix_expr);
 	replaceAll(infix_expr,"x", "(" + x_expr + ")");
 	if(onp.infixToONP(infix_expr,onp_ex) == -1)
 	{
