@@ -213,7 +213,7 @@ void CKalkulatorONPDlg::DrawAxis()
 {
 	CDC* pDC = GetDC();
 	pDC->Rectangle(0,0,700,700);
-	int width = 10;
+	int width = 20;
 	DrawNet(width);
 
 	COLORREF qLineColor = RGB(0,0,0);
@@ -242,20 +242,20 @@ void CKalkulatorONPDlg::DrawAxis()
 	pDC->LineTo(WPoint(width*0.96,-width*0.04, width));
 	pDC->TextOut(wPoint.GetX(width*0.96, width),wPoint.GetY(-width*0.04, width),yString);
 	
-	for(int i = -width; i<width; i+=2)
+	for(int i = -width; i<width; i+=width/5)
 	{
 		pDC->MoveTo(WPoint(i,-width*0.02, width));
 		pDC->LineTo(WPoint(i,width*0.02, width));
-		pDC->TextOut(wPoint.GetX(i+width*0.01, width),wPoint.GetY(-width*0.04, width),to_string(i).c_str());
+		pDC->TextOut(wPoint.GetX(-(i+width*0.01), width),wPoint.GetY(-width*0.04, width),to_string(i).c_str());
 	}
 
-	for(int i = -width; i<width; i+=2)
+	for(int i = -width; i<width; i+=width/5)
 	{
 		pDC->MoveTo(WPoint(-width*0.02,i, width));
 		pDC->LineTo(WPoint(width*0.02,i, width));
 		if(i)
 		{
-			pDC->TextOut(wPoint.GetX(width*0.04, width),wPoint.GetY(i+width*0.01, width),to_string(i).c_str());
+			pDC->TextOut(wPoint.GetX(-(width*0.04), width),wPoint.GetY(i+width*0.01, width),to_string(i).c_str());
 		}
 	}
 
@@ -269,13 +269,13 @@ void CKalkulatorONPDlg::DrawNet(int width)
 	pDC->SelectObject(&qLinePen);
 	
 
-	for(float i = -width; i<width; i+=0.5)
+	for(float i = -width; i<width; i+=width/20)
 	{
 		pDC->MoveTo(WPoint(i,-width, width));
 		pDC->LineTo(WPoint(i,width, width));
 	}
 
-	for(float j = -width; j<width; j+=0.5)
+	for(float j = -width; j<width; j+=width/20)
 	{
 		pDC->MoveTo(WPoint(-width,j, width));
 		pDC->LineTo(WPoint(width,j, width));
@@ -603,7 +603,7 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	CPen qLinePen(PS_SOLID, 2, qLineColor); 
 	pDC->SelectObject(&qLinePen);
 	
-	int width = 10;
+	int width = 20;
 	long double fY;
 
 	for (float fX = - width; fX < width; fX += 0.1f)
@@ -615,11 +615,11 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 		//fY = evaluate(onp_ex,fX);
 		if(fX == - width)
 		{	
-			pDC->MoveTo(WPoint(fX,fY, width));
+			pDC->MoveTo(WPoint(-fX,fY, width));
 		}
 		else
 		{
-			pDC->LineTo(WPoint(fX,fY, width));
+			pDC->LineTo(WPoint(-fX,fY, width));
 		}
 	}
 }
