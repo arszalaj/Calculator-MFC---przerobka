@@ -57,9 +57,6 @@ END_MESSAGE_MAP()
 
 CKalkulatorONPDlg::CKalkulatorONPDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CKalkulatorONPDlg::IDD, pParent)
-	, rbin(0)
-	, roct(0)
-	, rhex(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -209,17 +206,15 @@ void CKalkulatorONPDlg::OnPaint()
 	{
 		CDialog::OnPaint();
 		DrawAxis();
-		//DrawNet();
 	}
 }
 
 void CKalkulatorONPDlg::DrawAxis()
 {
-	//COLORREF qCircleColor = RGB(255,0,0);
-	//CPen qCirclePen(PS_SOLID, 7, qCircleColor);
 	CDC* pDC = GetDC();
 	pDC->Rectangle(0,0,700,700);
-	//CPen* pqOrigPen = pDC->SelectObject(&qCirclePen);
+	int width = 10;
+	DrawNet(width);
 
 	COLORREF qLineColor = RGB(0,0,0);
 	CPen qLinePen(PS_SOLID, 2, qLineColor); 
@@ -227,22 +222,10 @@ void CKalkulatorONPDlg::DrawAxis()
 	
 	pDC->SetPixel(200, 200, qLineColor);
 
-//	Get
-//	CRect rect;
-//CWnd *pWnd = CKalkulatorONPDlg::GetDlgItem(IDD_KALKULATORONP_DIALOG);
-//pWnd->GetWindowRect(&rect);
-////pDlg->ScreenToClient(&rect);
-
 	pDC->MoveTo(WPoint(0,-10));
 	pDC->LineTo(WPoint(0,10));
-	CString trol = CString("trol");
-	pDC->TextOut(10,10,trol);
-	//pDC->SelectObject(pqOrigPen);
-	//
-	//pDC->AbortPath();
-	//pDC->SetPixel(200, 200, qCircleColor);
-	
-	int width = 10;
+	CString xString = CString("x");
+	CString yString = CString("y");
 
 	pDC->MoveTo(WPoint(-width,0));
 	pDC->LineTo(WPoint(width,0));
@@ -251,38 +234,51 @@ void CKalkulatorONPDlg::DrawAxis()
 	pDC->LineTo(WPoint(0,width));
 	pDC->LineTo(WPoint(width*0.04,width*0.96));
 
+	WPoint wPoint;
+	pDC->TextOut(wPoint.GetX(width*0.04),wPoint.GetY(width*0.96),xString);
+
 	pDC->MoveTo(WPoint(width*0.96,width*0.04));
 	pDC->LineTo(WPoint(width,0));
 	pDC->LineTo(WPoint(width*0.96,-width*0.04));
-}
-
-void CKalkulatorONPDlg::DrawNet()
-{
-	CDC* pDC = GetDC();
-	COLORREF qLineColor = RGB(0,0,0);
-	CPen qLinePen(PS_SOLID, 1, qLineColor); 
-	pDC->SelectObject(&qLinePen);
+	pDC->TextOut(wPoint.GetX(width*0.96),wPoint.GetY(-width*0.04),yString);
 	
-	int width = 10;
+	for(int i = -width; i<width; i+=2)
+	{
+		pDC->MoveTo(WPoint(i,-width*0.02));
+		pDC->LineTo(WPoint(i,width*0.02));
+		pDC->TextOut(wPoint.GetX(i+width*0.01),wPoint.GetY(-width*0.04),to_string(i).c_str());
+	}
 
 	for(int i = -width; i<width; i+=2)
 	{
-		for(int j = -width-1; j<width; j+=2)
+		pDC->MoveTo(WPoint(-width*0.02,i));
+		pDC->LineTo(WPoint(width*0.02,i));
+		if(i)
 		{
-			pDC->MoveTo(WPoint(i,j++));
-			pDC->LineTo(WPoint(i,j++));
-			pDC->LineTo(WPoint(i,j));
+			pDC->TextOut(wPoint.GetX(width*0.04),wPoint.GetY(i+width*0.01),to_string(i).c_str());
 		}
 	}
 
-	for(int j = -width; j<width; j+=2)
+}
+
+void CKalkulatorONPDlg::DrawNet(int width)
+{
+	CDC* pDC = GetDC();
+	COLORREF qLineColor = RGB(200,200,200);
+	CPen qLinePen(PS_SOLID, 0.05, qLineColor); 
+	pDC->SelectObject(&qLinePen);
+	
+
+	for(float i = -width; i<width; i+=0.5)
 	{
-		for(int i = -width-1; i<width; i+=2)
-		{
-			pDC->MoveTo(WPoint(i++,j));
-			pDC->LineTo(WPoint(i++,j));
-			pDC->LineTo(WPoint(i,j));
-		}
+		pDC->MoveTo(WPoint(i,-width));
+		pDC->LineTo(WPoint(i,width));
+	}
+
+	for(float j = -width; j<width; j+=0.5)
+	{
+		pDC->MoveTo(WPoint(-width,j));
+		pDC->LineTo(WPoint(width,j));
 	}
 }
 
@@ -603,7 +599,7 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 {
 	string onp_ex, infixTmp = AddMultForX(infix_expr);
 	CDC* pDC = GetDC();
-	COLORREF qLineColor = RGB(0,0,0);
+	COLORREF qLineColor = RGB(255,0,0);
 	CPen qLinePen(PS_SOLID, 1, qLineColor); 
 	pDC->SelectObject(&qLinePen);
 	
