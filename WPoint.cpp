@@ -19,14 +19,6 @@ WPoint::WPoint(
 	y = evaluateCoordinate(initY, 10);
 }
 
-WPoint::WPoint(
-	double initX,
-	double initY) throw()
-{
-	x = evaluateCoordinate(initX, 10);
-	y = evaluateCoordinate(initY, 10);
-}
-
 WPoint::~WPoint(void)
 {
 }

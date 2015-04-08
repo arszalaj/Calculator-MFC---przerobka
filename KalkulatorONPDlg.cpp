@@ -237,9 +237,9 @@ void CKalkulatorONPDlg::DrawAxis()
 	WPoint wPoint;
 	pDC->TextOut(wPoint.GetX(width*0.04, width),wPoint.GetY(width*0.96, width),xString);
 
-	pDC->MoveTo(WPoint(width*0.96,width*0.04));
-	pDC->LineTo(WPoint(width,0));
-	pDC->LineTo(WPoint(width*0.96,-width*0.04));
+	pDC->MoveTo(WPoint(width*0.96,width*0.04, width));
+	pDC->LineTo(WPoint(width,0, width));
+	pDC->LineTo(WPoint(width*0.96,-width*0.04, width));
 	pDC->TextOut(wPoint.GetX(width*0.96, width),wPoint.GetY(-width*0.04, width),yString);
 	
 	for(int i = -width; i<width; i+=2)
@@ -615,11 +615,11 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 		//fY = evaluate(onp_ex,fX);
 		if(fX == - width)
 		{	
-			pDC->MoveTo(WPoint(fX,fY));
+			pDC->MoveTo(WPoint(fX,fY, width));
 		}
 		else
 		{
-			pDC->LineTo(WPoint(fX,fY));
+			pDC->LineTo(WPoint(fX,fY, width));
 		}
 	}
 }
