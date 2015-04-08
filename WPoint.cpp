@@ -13,26 +13,35 @@ WPoint::WPoint(void)
 
 WPoint::WPoint(
 	double initX,
+	double initY, int width) throw()
+{
+	x = evaluateCoordinate(initX, 10);
+	y = evaluateCoordinate(initY, 10);
+}
+
+WPoint::WPoint(
+	double initX,
 	double initY) throw()
 {
-	dX = 350;
-	dY = 350;
-	int mX = 35;
-	int mY = -35;
-	x = initX*mX + dX;
-	y = initY*mY + dY;
+	x = evaluateCoordinate(initX, 10);
+	y = evaluateCoordinate(initY, 10);
 }
 
 WPoint::~WPoint(void)
 {
 }
 
-double WPoint::GetX(double x)
+double WPoint::GetX(double x, int width)
 {
-	return x*mX + dX;
+	return evaluateCoordinate(x, width);
 }
 
-double WPoint::GetY(double y)
+double WPoint::GetY(double y, int width)
 {
-	return y*mY + dY;
+	return evaluateCoordinate(y, width);
+}
+
+double WPoint::evaluateCoordinate(double coordinate, int width)
+{
+	return (coordinate*mY/width*10 + dY);
 }

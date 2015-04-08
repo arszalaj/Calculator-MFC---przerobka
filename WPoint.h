@@ -5,10 +5,14 @@ public:
 	WPoint(void);
 	WPoint(
 		_In_ double initX,
+		_In_ double initY, int width) throw();
+	WPoint(
+		_In_ double initX,
 		_In_ double initY) throw();
 	~WPoint(void);
-	double GetX(double x);
-	double GetY(double y);
+	double GetX(double x, int width);
+	double GetY(double y, int width);
 private:
+double WPoint::evaluateCoordinate(double coordinate, int width);
 };
 
