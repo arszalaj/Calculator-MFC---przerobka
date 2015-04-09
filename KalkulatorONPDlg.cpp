@@ -88,6 +88,7 @@ void CKalkulatorONPDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, ed_onpexp);
 	DDX_Control(pDX, IDC_EDIT2, ed_exp);
 	DDX_Control(pDX, IDC_EDIT4, ed_x);
+	DDX_Control(pDX, IDC_EDIT5, ed_width);
 }
 
 BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
@@ -213,7 +214,14 @@ void CKalkulatorONPDlg::DrawAxis()
 {
 	CDC* pDC = GetDC();
 	pDC->Rectangle(0,0,700,700);
-	int width = 20;
+	CString widthStr;
+	ed_width.GetWindowText(widthStr);
+	int width;
+	if(widthStr.GetLength() > 0)
+	{
+		width = atoi(widthStr);
+	}
+	//width = widthStr.GetLength() > 0 ? atoi(widthStr) : 10;
 	DrawNet(width);
 
 	COLORREF qLineColor = RGB(0,0,0);
@@ -568,6 +576,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 	char buf[256];
 	infix_expr = AddMultForX(infix_expr);
 	replaceAll(infix_expr,"x", "(" + x_expr + ")");
+	DrawAxis();
 	if(onp.infixToONP(infix_expr,onp_ex) == -1)
 	{
 		buffer = "Nieprawidlowe lub nieobslugiwane wyrazenie";
@@ -603,7 +612,10 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	CPen qLinePen(PS_SOLID, 2, qLineColor); 
 	pDC->SelectObject(&qLinePen);
 	
-	int width = 20;
+	CString widthStr;
+	ed_width.GetWindowText(widthStr);
+	int width = atoi(widthStr);
+	//width = widthStr.GetLength() > 0 ? atoi(widthStr) : 10;
 	long double fY;
 
 	for (float fX = - width; fX < width; fX += 0.1f)

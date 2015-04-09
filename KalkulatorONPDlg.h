@@ -75,6 +75,7 @@ public:
 	CEdit ed_onpexp;
 	CEdit ed_exp;
 	CEdit ed_x;
+	CEdit ed_width;
 	afx_msg void OnBnClicked1();
 	afx_msg void OnBnClicked2();
 	afx_msg void OnBnClicked3();
