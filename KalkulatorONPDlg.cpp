@@ -606,7 +606,7 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	int width = 20;
 	long double fY;
 
-	for (float fX = - width; fX < width; fX += 0.1f)
+	for (float fX = - width; fX < width; fX += 0.5f)
 	{
 		infix_expr = infixTmp;
 		replaceAll(infix_expr,"x", "(" + to_string(fX) + ")");

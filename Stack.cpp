@@ -7,7 +7,7 @@
 */
 CStack::CStack(void)
 {
-	stack.reserve(20);
+	//stack.reserve(20);
 }
 
 CStack::~CStack(void)

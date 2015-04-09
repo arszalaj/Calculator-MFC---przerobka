@@ -1,11 +1,11 @@
 #pragma once
 #include <vector>
+#include <deque>
 #include <string>
 using namespace std;
 
-/** \brief Implementacja stosu 
+/** 
 * Implementacja stosu elementów klasy string z wykorzystaniem pojemnika (vector).
-* @author 
 */
 class CStack
 {
@@ -23,6 +23,6 @@ public:
 	bool look(string &bufor);
 
 private:
-	std::vector <std::string> stack; ///< pojemnik elementów klasy string
-	//std::deque <std::string> stack; ///< pojemnik elementów klasy string
+	//std::vector <std::string> stack; ///< pojemnik elementów klasy string
+	std::deque <std::string> stack; ///< pojemnik elementów klasy string
 };
