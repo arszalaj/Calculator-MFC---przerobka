@@ -222,8 +222,8 @@ void CKalkulatorONPDlg::DrawAxis()
 	
 	pDC->SetPixel(200, 200, qLineColor);
 
-	pDC->MoveTo(WPoint(0,-10, width));
-	pDC->LineTo(WPoint(0,10, width));
+	pDC->MoveTo(WPoint(0,-width, width));
+	pDC->LineTo(WPoint(0,width, width));
 	CString xString = CString("x");
 	CString yString = CString("y");
 
@@ -235,12 +235,12 @@ void CKalkulatorONPDlg::DrawAxis()
 	pDC->LineTo(WPoint(width*0.04,width*0.96, width));
 
 	WPoint wPoint;
-	pDC->TextOut(wPoint.GetX(width*0.04, width),wPoint.GetY(width*0.96, width),xString);
+	pDC->TextOut(wPoint.GetX(-width*0.04, width),wPoint.GetY(width*0.96, width),yString);
 
-	pDC->MoveTo(WPoint(width*0.96,width*0.04, width));
-	pDC->LineTo(WPoint(width,0, width));
-	pDC->LineTo(WPoint(width*0.96,-width*0.04, width));
-	pDC->TextOut(wPoint.GetX(width*0.96, width),wPoint.GetY(-width*0.04, width),yString);
+	pDC->MoveTo(WPoint(-width*0.96,width*0.04, width));
+	pDC->LineTo(WPoint(-width,0, width));
+	pDC->LineTo(WPoint(-width*0.96,-width*0.04, width));
+	pDC->TextOut(wPoint.GetX(width*0.96, width),wPoint.GetY(-width*0.04, width),xString);
 	
 	for(int i = -width; i<width; i+=width/5)
 	{
