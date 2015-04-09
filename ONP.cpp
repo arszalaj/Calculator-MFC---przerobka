@@ -287,21 +287,3 @@ long long CONP::my_atoll(const char *instr) const
   }
   return retval;
 }
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
