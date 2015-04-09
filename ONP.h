@@ -36,12 +36,8 @@ public:
 	int infixToONP(std::string infix,std::string &onp);
 	int evaluateONP(std::string onp,long double &result);
 
-
 private:
 	int getPrior(string op,int &assoc);
 	int getNextElement(string exp,string &buffer, int &position,bool ONP);
-	long long my_atoll(const char *instr) const;
-
-
 
 };

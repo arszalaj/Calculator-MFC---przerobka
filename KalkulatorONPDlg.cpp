@@ -156,7 +156,7 @@ BOOL CKalkulatorONPDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	ed_exp.SetFocus();
 	//Make sure this is here so you can use XP Styles
-	InitCommonControls(); // potrzebne do wygl¹du a'la xp
+	InitCommonControls();
 	
 	DrawAxis();
 
@@ -292,7 +292,7 @@ BOOL CKalkulatorONPDlg::PreTranslateMessage(MSG* pMsg)
 
 {
 	int x = pMsg->wParam;
-	if(pMsg->message == WM_KEYDOWN) // jezeli wcisnieto klawisz
+	if(pMsg->message == WM_KEYDOWN)
 	{
 		ed_exp.SetFocus(); // ustaw aktywny wyswietlacz
 		if(x == VK_RETURN) // jezeli byl to ENTER
@@ -514,8 +514,8 @@ void CKalkulatorONPDlg::OnBnClickedPlusMinus()
 void CKalkulatorONPDlg::OnBnClickedCE()
 {
 	// TODO: Add your control notification handler code here
-	expr.Empty(); // czyscimy wyrazenie
-	onp_expr.Empty(); // czyscimy wyrazenie ONP
+	expr.Empty();
+	onp_expr.Empty();
 	result.Empty();
 	ed_onpexp.SetWindowTextA("");
 	ed_exp.SetWindowTextA("");

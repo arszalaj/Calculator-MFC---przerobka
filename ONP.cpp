@@ -269,21 +269,3 @@ int CONP::evaluateONP(std::string onp,long double &result)
 	stack.pop(buffer2); 
 	result = atof(buffer2.c_str()); 
 }
-
-
-/**
-* Zamienia ³añcuch zawieraj¹cy liczbê ca³kowit¹ na wartoœæ liczbow¹ typu long long 
-* @param *instr wskaŸnik do tablicy z ³añcuchem liczbowym
-* @return wartoœæ ca³kowita typu long long odpowiadaj¹ca ³añcuchowi wejœciowemu
-*/
-long long CONP::my_atoll(const char *instr) const
-{
-  long long retval;
-  int i;
-
-  retval = 0;
-  for (; *instr; instr++) {
-    retval = 10*retval + (*instr - '0');
-  }
-  return retval;
-}
