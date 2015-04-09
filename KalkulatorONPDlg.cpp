@@ -212,6 +212,13 @@ void CKalkulatorONPDlg::DrawAxis()
 	CDC* pDC = GetDC();
 	pDC->Rectangle(0,0,700,700);
 	int width = 20;
+	
+	CString bufferX;
+	ed_x.GetWindowTextA(bufferX);
+	string x_expr = bufferX.GetString();
+	if(x_expr.length() > 0)
+		sscanf(x_expr.c_str(), "%d", &width);
+
 	DrawNet(width);
 
 	COLORREF qLineColor = RGB(0,0,0);
@@ -267,13 +274,13 @@ void CKalkulatorONPDlg::DrawNet(int width)
 	pDC->SelectObject(&qLinePen);
 	
 
-	for(float i = -width; i<width; i+=width/20)
+	for(float i = -width; i<width; i+=(float)width/20)
 	{
 		pDC->MoveTo(WPoint(i,-width, width));
 		pDC->LineTo(WPoint(i,width, width));
 	}
 
-	for(float j = -width; j<width; j+=width/20)
+	for(float j = -width; j<width; j+=(float)width/20)
 	{
 		pDC->MoveTo(WPoint(-width,j, width));
 		pDC->LineTo(WPoint(width,j, width));
@@ -587,6 +594,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 			wyn = buf;
 			ed_result.SetWindowTextA(wyn.c_str());
 
+			DrawAxis();
 			DrawCurve(infix_exprTmp);
 		}
 	}
@@ -602,9 +610,16 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	pDC->SelectObject(&qLinePen);
 	
 	int width = 20;
+
+	CString bufferX;
+	ed_x.GetWindowTextA(bufferX);
+	string x_expr = bufferX.GetString();
+	if(x_expr.length() > 0)
+		sscanf(x_expr.c_str(), "%d", &width);
+
 	long double fY;
 
-	for (float fX = - width; fX < width; fX += 0.5f)
+	for (float fX = - width; fX < width; fX += (float)width/20)
 	{
 		infix_expr = infixTmp;
 		replaceAll(infix_expr,"x", "(" + to_string(fX) + ")");
