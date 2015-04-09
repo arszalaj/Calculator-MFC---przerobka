@@ -576,7 +576,7 @@ void CKalkulatorONPDlg::OnBnClickedEqual()
 	char buf[256];
 	infix_expr = AddMultForX(infix_expr);
 	replaceAll(infix_expr,"x", "(" + x_expr + ")");
-	DrawAxis();
+	//DrawAxis();
 	if(onp.infixToONP(infix_expr,onp_ex) == -1)
 	{
 		buffer = "Nieprawidlowe lub nieobslugiwane wyrazenie";
