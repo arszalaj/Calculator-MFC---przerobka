@@ -11,12 +11,6 @@ CONP::~CONP(void)
 {
 }
 
-/**
-* Zwraca priotytet operatora oraz jego ³acznoœæ.
-* @param[in] op operator
-* @param[out] assoc ³¹cznoœæ
-* @return priorytet operatora (im wy¿szy, tym wy¿sza kolejnoœæ wykonywania)
-*/
 int CONP::getPrior(std::string op, int &assoc)
 {
 	assoc = LEFT_ASSOC;
@@ -29,15 +23,6 @@ int CONP::getPrior(std::string op, int &assoc)
 
 	return 0;
 }
-/**
-* Pobiera kolejny element wyra¿enia.
-* Elementem mo¿e byæ zarówno liczba, funkcja czy operator.
-* @param[in] exp wyra¿enie
-* @param[out] buffer bufor
-* @param position Pozycja aktualnie przetwarzanego znaku w wyra¿eniu.
-* @param[in] ONP 0 - jeœli wyra¿enie w postaci infiksowej, 1 - jeœli wyra¿enie w ONP
-* @return typ rozpoznanego elementu (FUNCTION,OPERATOR,NUMBER)
-*/
 int CONP::getNextElement(string exp,string &buffer, int &position,bool ONP)
 {
 	buffer.clear();
@@ -95,12 +80,7 @@ int CONP::getNextElement(string exp,string &buffer, int &position,bool ONP)
 	return EOS; 
 	           
 }
-/**
-* Przekszta³ca wyra¿enie w notacji infiksowej do wyra¿enia w notacji ONP.
-* @param[in] infix wyra¿enie w notacji infiksowej
-* @param[out] onp obiekt klasy string , w którym ma byæ zapisane przekszta³cone do ONP wyra¿enie.
-* @return zwraca 0, je¿eli przekszta³cenie sie powiedzie, -1 - jeœli siê nie powiedzie
-*/
+
 int CONP::infixToONP(string infix,string &onp)
 {
 	CStack stack;
@@ -161,12 +141,6 @@ int CONP::infixToONP(string infix,string &onp)
 	return 0;
 }
 
-/**
-* Oblicza wartoœæ wyra¿enia w ONP.
-* @param[in] onp wyra¿enie w ONP
-* @param[out] result wynik wyra¿enia
-* @return zwraca -1, gdy obliczenie nie powiod³o siê, w przeciwnym razie 0.
-*/
 int CONP::evaluateONP(std::string onp,long double &result)
 {
 
