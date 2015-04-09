@@ -238,7 +238,7 @@ void CKalkulatorONPDlg::DrawAxis()
 	pDC->MoveTo(WPoint(-width*0.96,width*0.04, width));
 	pDC->LineTo(WPoint(-width,0, width));
 	pDC->LineTo(WPoint(-width*0.96,-width*0.04, width));
-	pDC->TextOut(wPoint.GetX(width*0.96, width),wPoint.GetY(-width*0.04, width),xString);
+	pDC->TextOut(wPoint.GetX(-width*0.96, width),wPoint.GetY(-width*0.04, width),xString);
 	
 	for(int i = -width; i<width; i+=width/5)
 	{
