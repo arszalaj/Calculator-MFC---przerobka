@@ -157,8 +157,6 @@ BOOL CKalkulatorONPDlg::OnInitDialog()
 	ed_exp.SetFocus();
 	//Make sure this is here so you can use XP Styles
 	InitCommonControls(); // potrzebne do wygl¹du a'la xp
-	rdec.SetCheck(1);
-	rad_rad.SetCheck(1);
 	
 	DrawAxis();
 
