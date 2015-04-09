@@ -13,6 +13,7 @@
 #define IDC_EDIT2                       1001
 #define IDC_EDIT3                       1002
 #define IDC_EDIT4                       1003
+#define IDC_EDIT5                       1004
 #define IDC_1                           1009
 #define IDC_C_HEx                       1010
 #define IDC_DEC_RAD                     1011

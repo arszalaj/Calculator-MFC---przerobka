@@ -102,8 +102,6 @@ int CONP::infixToONP(string infix,string &onp)
 				break;
 			
 			case OPERATOR : 
-			
-			
 				while(stack.look(buffer2) && buffer2.compare("( ") && buffer2.compare(") ") &&
 					(getPrior(buffer.substr(0,buffer.length()-1),assoc) <= getPrior(buffer2.substr(0,buffer2.length()-1),assoc2) 
 					&& assoc == LEFT_ASSOC )
@@ -130,6 +128,7 @@ int CONP::infixToONP(string infix,string &onp)
 						onp+= buffer2; 
 				}
 				break;
+
 			case ERROR: 
 				return ERROR;  
 		}

@@ -88,6 +88,7 @@ void CKalkulatorONPDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, ed_onpexp);
 	DDX_Control(pDX, IDC_EDIT2, ed_exp);
 	DDX_Control(pDX, IDC_EDIT4, ed_x);
+	DDX_Control(pDX, IDC_EDIT5, ed_width);
 }
 
 BEGIN_MESSAGE_MAP(CKalkulatorONPDlg, CDialog)
@@ -214,7 +215,7 @@ void CKalkulatorONPDlg::DrawAxis()
 	int width = 20;
 	
 	CString bufferX;
-	ed_x.GetWindowTextA(bufferX);
+	ed_width.GetWindowTextA(bufferX);
 	string x_expr = bufferX.GetString();
 	if(x_expr.length() > 0)
 		sscanf(x_expr.c_str(), "%d", &width);
@@ -301,7 +302,7 @@ BOOL CKalkulatorONPDlg::PreTranslateMessage(MSG* pMsg)
 	int x = pMsg->wParam;
 	if(pMsg->message == WM_KEYDOWN)
 	{
-		ed_exp.SetFocus(); // ustaw aktywny wyswietlacz
+		//ed_exp.SetFocus(); // ustaw aktywny wyswietlacz
 		if(x == VK_RETURN) // jezeli byl to ENTER
 		{
 			OnBnClickedEqual(); // zasymuluj wcisniecie =
@@ -612,7 +613,7 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	int width = 20;
 
 	CString bufferX;
-	ed_x.GetWindowTextA(bufferX);
+	ed_width.GetWindowTextA(bufferX);
 	string x_expr = bufferX.GetString();
 	if(x_expr.length() > 0)
 		sscanf(x_expr.c_str(), "%d", &width);
