@@ -620,7 +620,7 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 
 	long double fY;
 
-	for (float fX = - width; fX < width; fX += (float)width/20)
+	for (float fX = - width; fX < width; fX += (float)width/40)
 	{
 		infix_expr = infixTmp;
 		replaceAll(infix_expr,"x", "(" + to_string(fX) + ")");
