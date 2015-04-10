@@ -212,13 +212,13 @@ void CKalkulatorONPDlg::DrawAxis()
 {
 	CDC* pDC = GetDC();
 	pDC->Rectangle(0,0,700,700);
-	int width = 20;
+	float width = 20;
 	
 	CString bufferX;
 	ed_width.GetWindowTextA(bufferX);
 	string x_expr = bufferX.GetString();
 	if(x_expr.length() > 0)
-		sscanf(x_expr.c_str(), "%d", &width);
+		sscanf(x_expr.c_str(), "%f", &width);
 
 	DrawNet(width);
 
@@ -248,26 +248,30 @@ void CKalkulatorONPDlg::DrawAxis()
 	pDC->LineTo(WPoint(-width*0.96,-width*0.04, width));
 	pDC->TextOut(wPoint.GetX(-width*0.96, width),wPoint.GetY(-width*0.04, width),xString);
 	
-	for(int i = -width; i<width; i+=width/5)
+	for(float i = -width; i<width; i+=width/5)
 	{
 		pDC->MoveTo(WPoint(i,-width*0.02, width));
 		pDC->LineTo(WPoint(i,width*0.02, width));
-		pDC->TextOut(wPoint.GetX(-(i+width*0.01), width),wPoint.GetY(-width*0.04, width),to_string(i).c_str());
+		char iStr [4];
+		sprintf(iStr,"%f10.1",i);
+		pDC->TextOut(wPoint.GetX(-(i+width*0.01), width),wPoint.GetY(-width*0.04, width),iStr);
 	}
 
-	for(int i = -width; i<width; i+=width/5)
+	for(float i = -width; i<width; i+=width/5)
 	{
 		pDC->MoveTo(WPoint(-width*0.02,i, width));
 		pDC->LineTo(WPoint(width*0.02,i, width));
+		char iStr [10];
+		sprintf(iStr,"%f10.1",i);
 		if(i)
 		{
-			pDC->TextOut(wPoint.GetX(-(width*0.04), width),wPoint.GetY(i+width*0.01, width),to_string(i).c_str());
+			pDC->TextOut(wPoint.GetX(-(width*0.04), width),wPoint.GetY(i+width*0.01, width),iStr);
 		}
 	}
 
 }
 
-void CKalkulatorONPDlg::DrawNet(int width)
+void CKalkulatorONPDlg::DrawNet(float width)
 {
 	CDC* pDC = GetDC();
 	COLORREF qLineColor = RGB(200,200,200);
@@ -610,13 +614,13 @@ void CKalkulatorONPDlg::DrawCurve(string infix_expr)
 	CPen qLinePen(PS_SOLID, 2, qLineColor); 
 	pDC->SelectObject(&qLinePen);
 	
-	int width = 20;
+	float width = 20;
 
 	CString bufferX;
 	ed_width.GetWindowTextA(bufferX);
 	string x_expr = bufferX.GetString();
 	if(x_expr.length() > 0)
-		sscanf(x_expr.c_str(), "%d", &width);
+		sscanf(x_expr.c_str(), "%f", &width);
 
 	long double fY;
 

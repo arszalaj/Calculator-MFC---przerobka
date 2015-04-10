@@ -41,7 +41,7 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg void DrawAxis();
-	afx_msg void DrawNet(int width);
+	afx_msg void DrawNet(float width);
 	afx_msg void DrawCurve(string infix);
 	double evaluate(string infix_expr, double x);
 	afx_msg HCURSOR OnQueryDragIcon();
